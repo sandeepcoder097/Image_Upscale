@@ -12,16 +12,16 @@ public class DriverFactory {
         WebDriver driver = null;
 
         if (browser.equalsIgnoreCase("chrome")) {
-            WebDriverManager.chromedriver().setup(); // WebDriverManager manages the ChromeDriver
+            WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
             driver = new ChromeDriver(options);
            // driver = new ChromeDriver();
         } else if (browser.equalsIgnoreCase("firefox")) {
-            WebDriverManager.firefoxdriver().setup(); // WebDriverManager manages the GeckoDriver
+            WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver();
         }
 
-        driver.manage().window().maximize(); // Maximize browser window
+        driver.manage().window().maximize();
         return driver;
     }
 }
