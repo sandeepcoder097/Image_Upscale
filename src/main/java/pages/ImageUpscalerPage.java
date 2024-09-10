@@ -2,15 +2,27 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.awt.*;
+import java.time.Duration;
+import java.util.List;
 
 public class ImageUpscalerPage {
     WebDriver driver;
 
-    By uploadButton = By.xpath("/html/body/div[1]/div[2]/section[2]/div/div/div[1]/div[2]/button");  // Adjust with actual locators
-    By uploadStatus = By.id("upload_status_id");
-    By errorMessage = By.id("error_message_id");
-    By downloadButton = By.id("download_button_id");
-    By upscalingStatus = By.id("upscaling_status_id");
+    By pageHeading = By.xpath("//h1[text()='AI Image Enhancer Online']");
+    By uploadFile = By.xpath("//input[@type='file']");
+    By imageFile = By.xpath("//img[@alt='input']");
+    By uploadOption = By.id("upload");
+    By uploadBox = By.xpath("//div[@class='uploadBoxContent']");
+    By uploadStatus = By.className("Toastify");
+    By downloadButton = By.xpath("//*[@id='__next']/div[2]/div/div[2]/div/div[2]/div/div[2]/div/div[1]/div[2]/button[1]");
+    By imagePreview = By.className("__rcs-handle-button");
+    By ProcessButton = By.xpath("//button[text()='Process']");
+
 
     public ImageUpscalerPage(WebDriver driver) {
         this.driver = driver;
@@ -20,27 +32,60 @@ public class ImageUpscalerPage {
         driver.get("https://www.spyne.ai/image-upscaler");
     }
 
+    public void navigateToUpscalerUpload() {
+        driver.get("https://www.spyne.ai/image-upscaler/upload");
+    }
+
     public void uploadImage(String filePath) {
-        driver.findElement(uploadButton).sendKeys(filePath);
+        WebElement UploadFileElement = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfElementLocated(uploadFile));
+        UploadFileElement.sendKeys(filePath);
+    }
+
+    public boolean isPageHeadingDisplayed() {
+        WebElement UploadButtonElement = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfElementLocated(pageHeading));
+        return UploadButtonElement.isDisplayed();
     }
 
     public boolean isUploadButtonDisplayed() {
-        return driver.findElement(uploadButton).isDisplayed();
+        WebElement UploadButtonElement = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfElementLocated(uploadOption));
+        return UploadButtonElement.isDisplayed();
     }
 
     public boolean isUploadSuccessful() {
-        return driver.findElement(uploadStatus).isDisplayed();
+        WebElement imgElement = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfElementLocated(imageFile));
+        String expectedFileName = "testimg.webp";
+        String imgSrc = imgElement.getAttribute("src");
+        imgSrc.contains(expectedFileName);
+        System.out.println(imgSrc.contains(expectedFileName));
+        return imgSrc.contains(expectedFileName);
     }
 
-    public boolean isErrorMessageDisplayed() {
-        return driver.findElement(errorMessage).isDisplayed();
+    public void startProcessing() {
+        WebElement ProcessButtonElement = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfElementLocated(ProcessButton));
+        if(ProcessButtonElement.isDisplayed()) {
+            ProcessButtonElement.click();
+        }
     }
 
     public boolean isUpscalingSuccessful() {
-        return driver.findElement(upscalingStatus).isDisplayed();
+        WebElement ImagePreviewElement = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfElementLocated(imagePreview));
+        return ImagePreviewElement.isDisplayed();
     }
 
     public boolean isDownloadButtonDisplayed() {
-        return driver.findElement(downloadButton).isDisplayed();
+        WebElement DownloadButtonElement = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfElementLocated(downloadButton));
+        return DownloadButtonElement.isDisplayed();
+    }
+
+    public void downloadImage() {
+        WebElement DownloadButtonElement = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfElementLocated(downloadButton));
+        if (DownloadButtonElement.isDisplayed()) {
+            DownloadButtonElement.click();
+        }
+    }
+
+    public boolean isImagePreviewDisplayed() {
+        WebElement ImagePreviewElement = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfElementLocated(imagePreview));
+        return ImagePreviewElement.isDisplayed();
     }
 }
