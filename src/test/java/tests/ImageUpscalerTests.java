@@ -39,7 +39,7 @@ public class ImageUpscalerTests {
     public void testNavigationToWebsite() {
         test = extent.createTest("testNavigationToWebsite");
         page.navigateToUpscaler();
-        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         assert page.isPageHeadingDisplayed() : "Page Heading not displayed";
         test.pass("Homepage landed correctly");
     }
@@ -74,6 +74,7 @@ public class ImageUpscalerTests {
         page.uploadImage("/Users/sandeepsharma/IdeaProjects/SpyneUpscalerAutomation/src/main/resources/testimg.webp");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         page.startProcessing();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         Assert.assertTrue(page.isUpscalingSuccessful(), "Image upscaling process did not complete successfully");
         test.pass("Image Upscaling process completed");
     }
@@ -87,6 +88,7 @@ public class ImageUpscalerTests {
         page.uploadImage("/Users/sandeepsharma/IdeaProjects/SpyneUpscalerAutomation/src/main/resources/testimg.webp");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         page.startProcessing();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         Assert.assertTrue(page.isUploadButtonDisplayed(), "Upload button is not displayed");
         Assert.assertTrue(page.isImagePreviewDisplayed(), "Image preview is not displayed");
         Assert.assertTrue(page.isDownloadButtonDisplayed(), "Download button is not displayed");
@@ -103,6 +105,7 @@ public class ImageUpscalerTests {
         page.uploadImage("/Users/sandeepsharma/IdeaProjects/SpyneUpscalerAutomation/src/main/resources/testimg.webp");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         page.startProcessing();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         Assert.assertTrue(page.isUpscalingSuccessful(), "Upscaling did not complete");
         page.downloadImage();  // Trigger the download
         test.pass("Download Successful");
@@ -118,6 +121,7 @@ public class ImageUpscalerTests {
         page.uploadImage("/Users/sandeepsharma/IdeaProjects/SpyneUpscalerAutomation/src/main/resources/testimg.webp");  // Large image file for performance test
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         page.startProcessing();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         Assert.assertTrue(page.isUpscalingSuccessful(), "Image upscaling process did not complete successfully");
 
         long endTime = System.currentTimeMillis();
