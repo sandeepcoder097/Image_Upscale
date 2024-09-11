@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
+import java.util.List;
 
 public class ImageUpscalerPage {
     WebDriver driver;
@@ -13,12 +14,11 @@ public class ImageUpscalerPage {
     By pageHeading = By.xpath("/html/body/div[1]/div[2]/section[2]/div/div/div[1]/div[1]/h1/span");
     By uploadFile = By.xpath("//input[@type='file']");
     By imageFile = By.xpath("//img[@alt='input']");
-    By uploadOption = By.id("upload");
     By uploadBox = By.xpath("//div[@class='uploadBoxContent']");
-    By downloadButton = By.xpath("//*[@id='__next']/div[2]/div/div[2]/div/div[2]/div/div[2]/div/div[1]/div[2]/button[1]");
+    By downloadButton = By.xpath("/html/body/div[1]/div[2]/div[2]/div/div[2]/div/div[2]/div/div[1]/div[2]/button[1]");
     By imagePreview = By.className("__rcs-handle-button");
     By ProcessButton = By.xpath("//button[text()='Process']");
-
+    By uploadOption = By.xpath("//label[@for='upload']");
 
     public ImageUpscalerPage(WebDriver driver) {
         this.driver = driver;
@@ -56,12 +56,14 @@ public class ImageUpscalerPage {
     }
 
     public void startProcessing() {
-        WebElement ProcessButtonElement = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfElementLocated(ProcessButton));
+        WebElement ProcessButtonElement = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(ProcessButton));
         ProcessButtonElement.click();
+        System.out.println("Clicked on Process");
     }
 
     public boolean isUpscalingSuccessful() {
         WebElement ImagePreviewElement = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfElementLocated(imagePreview));
+        System.out.println("waiting...");
         return ImagePreviewElement.isDisplayed();
     }
 
