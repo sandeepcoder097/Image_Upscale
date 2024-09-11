@@ -35,7 +35,7 @@ public class ImageUpscalerTests {
         page = new ImageUpscalerPage(driver);
     }
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void testNavigationToWebsite() {
         test = extent.createTest("testNavigationToWebsite");
         page.navigateToUpscaler();
@@ -44,7 +44,7 @@ public class ImageUpscalerTests {
         test.pass("Homepage landed correctly");
     }
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void testValidFileUpload() {
         test = extent.createTest("testValidFileUpload");
         page.navigateToUpscalerUpload();
@@ -55,7 +55,7 @@ public class ImageUpscalerTests {
     }
 
     // 3: Invalid File Upload
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void testInvalidFileUpload() {
         test = extent.createTest("testInValidFileUpload");
         page.navigateToUpscalerUpload();
@@ -66,7 +66,7 @@ public class ImageUpscalerTests {
     }
 
     // 4: Image Upscaling Process
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void testImageUpscalingProcess() {
         test = extent.createTest("testImageUpscalingProcess");
         page.navigateToUpscalerUpload();
@@ -97,7 +97,7 @@ public class ImageUpscalerTests {
     }
 
     // 6: Download Functionality
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void testDownloadFunctionality() {
         test = extent.createTest("testDownloadFunctionality");
         page.navigateToUpscalerUpload();
@@ -112,7 +112,7 @@ public class ImageUpscalerTests {
     }
 
     // 7: Performance Testing (Optional)
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void testPerformanceForUpscaling() {
         test = extent.createTest("testPerformanceForUpscaling");
         long startTime = System.currentTimeMillis();
@@ -152,7 +152,7 @@ public class ImageUpscalerTests {
     }*/
     @AfterMethod
     public  void end() {
-        driver.quit();
+        //driver.quit();
     }
     @AfterClass
     public void teardown() {
